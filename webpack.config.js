@@ -1,12 +1,20 @@
-const path = require('path');
-const webpack = require('webpack');
+var path = require('path');
+var webpack = require('webpack');
+var ExtractTextPlugin = require("extract-text-webpack-plugin");
+var WebpackDevServer = require("webpack-dev-server");
+var react = require('react');
 
 module.exports = {
 
-    devtool: 'cheap-module-eval-source-map',
+    devtool: 'source-map',
     
+    devServer: {
+        colors: true,
+        hot: true,
+        inline: true
+    },
+
     entry: [
-        'eventsource-polyfill',
         'webpack-hot-middleware/client',
         './src/javascript/index'
     ],
@@ -19,17 +27,15 @@ module.exports = {
     
     plugins: [
         new webpack.HotModuleReplacementPlugin(),
-        new webpack.DefinePlugin({
-            'process.env.NODE_ENV': JSON.stringify('development')
-        }),
         new webpack.ProvidePlugin({
             $ : 'jquery'
-        })
+        }),
+        new webpack.BannerPlugin('Created by zhenghongju')
     ],
     
     module: {
         loaders: [{
-            test: /\.js?/,
+            test: /\.js$/,
             exclude: [/node_modules/, /styles/],
             loaders: ['babel'],
             include: path.join(__dirname, 'src')

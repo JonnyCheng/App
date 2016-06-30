@@ -39,9 +39,9 @@ export const CONSTANTS = {
     }
 }
 
-export function getUserList() {
+export function getList() {
     return function (dispatch,getState) {
-        $.get('/users',function (d) {
+        $.get('/list',function (d) {
             if (d.code == 0) {
                 dispatch(userList(d.data))
             };
