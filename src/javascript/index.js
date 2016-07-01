@@ -12,15 +12,26 @@ import ListItem from './pages/list-item.js';
 
 import './../styles/main.scss';
 
+const reducer = combineReducers({
+    data    :     Reducers
+})
+
+const store = compose(
+    applyMiddleware(thunkMiddleware),
+    window.devToolsExtension ? window.devToolsExtension() : f => f
+)(createStore)(reducer)
+
 class Root extends Component {
 
     render() {
         return (
-            <Router history={hashHistory}>
-                <Route path="/" component={Layout}/>
-                <Route path="/list" component={List}/> 
-                <Route path="/listitem" component={ListItem}/> 
-            </Router>
+            <Provider store={store}>
+                <Router history={hashHistory}>
+                    <Route path="/" component={Layout}/>
+                    <Route path="list" component={List}/> 
+                    <Route path="listitem/:id" component={ListItem}/> 
+                </Router>
+            </Provider>
         )
     }
 

@@ -3,15 +3,15 @@ import * as Actions from './../actions/actions';
 
 import Immutable from 'immutable';
 
-function modules(state=Immutable.fromJS({current:0,data:[],page:{},searchValue:''}), action) {
+
+function getList(state=Immutable.fromJS(),action) {
     switch (action.type) {
-        case Actions.CONSTANTS.MODULES.ALL :
-            return Immutable.fromJS(action.data);
-        default : 
-            return state;
+        default :
+            return state
     }
 }
 
+
 export default combineReducers({
-    modules
+    getList
 })
